@@ -1,7 +1,6 @@
 FROM node
 MAINTAINER Chyld Medford <chyld.medford@gmail.com>
 
-USER root
 RUN apt-get update && apt-get install -y supervisor
 RUN useradd edon -m -s /bin/bash
 COPY docker/supervisor-node.conf /etc/supervisor/conf.d/
@@ -12,11 +11,11 @@ RUN chown -R edon:edon /src
 ENV REFRESHED_AT 2015-09-01
 ENV A Hello
 ENV PORT 5000
-EXPOSE $PORT
-WORKDIR /src
 
 USER edon
+WORKDIR /src
 RUN npm install
 
 USER root
+EXPOSE $PORT
 CMD ["/usr/bin/supervisord"]
