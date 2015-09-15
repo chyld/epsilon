@@ -18,4 +18,5 @@ RUN npm install
 
 USER root
 EXPOSE $PORT
+EXPOSE 9999
 CMD ["/usr/bin/supervisord"]
